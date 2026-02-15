@@ -1,0 +1,20 @@
+name: iOS build
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: |
+          xcodebuild -scheme RoofTrace \
+          -sdk iphoneos \
+          -configuration Release \
+          archive -archivePath RoofTrace.xcarchive
